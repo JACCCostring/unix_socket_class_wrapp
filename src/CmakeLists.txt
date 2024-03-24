@@ -1,0 +1,2 @@
+add_library(ssocket STATIC "socketresource.cpp" "tcpsocket.cpp")
+target_include_directories(ssocket PUBLIC "../include")
