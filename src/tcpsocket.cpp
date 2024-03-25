@@ -1,7 +1,5 @@
 #include <tcpsocket.hpp>
 
-#include <iostream>
-
 namespace ss
 {
     TcpSocket::TcpSocket(SocketResource::Family fam, SocketResource::Type typ): _socket{fam, typ}
