@@ -3,10 +3,10 @@ unix socket wrapper class, for Tcp Client/Server RAII, take in account for bette
 <h1>Install</h1>
 
 Just clone this repo: ```git clone https://github.com/JACCCostring/unix_socket_class_wrapp.git```
-make a directory: ```mkdir build```
-go to directory: ```cd build```
-call: ```cmake ..``` to configure
-call: ```make``` to build
+make a directory call: ```mkdir build```
+go to directory call: ```cd build```
+to configure call: ```cmake ..```
+to build call: ```make```
 
 the executable will bbe located at project_name/build/app/main_exec.exe
 
