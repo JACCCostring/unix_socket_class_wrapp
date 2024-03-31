@@ -12,7 +12,7 @@ the executable will bbe located at project_name/build/app/main_exec.exe
 
 <h1>Example</h1>
 
-'''cpp
+```cpp
 
 #include <iostream>
 #include <string>
@@ -51,4 +51,4 @@ int main(int argc, char **argv)
     return 0;
 }
 
-'''
+```
