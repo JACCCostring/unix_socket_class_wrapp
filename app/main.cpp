@@ -1,13 +1,8 @@
 #include <iostream>
-#include <thread>
-#include <chrono>
 #include <string>
 
 #include <tcpsocket.hpp>
 #include <tcpresolver.hpp>
-
-#include <netinet/in.h>
-#include <arpa/inet.h>
 
 int main(int argc, char **argv)
 {
