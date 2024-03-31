@@ -2,7 +2,7 @@ unix socket wrapper class, for Tcp Client/Server RAII, take in account for bette
 
 <h1>Install</h1>
 
-Just clone this repo: ```cpp git clone https://github.com/JACCCostring/unix_socket_class_wrapp.git```
+Just clone this repo: ```git clone https://github.com/JACCCostring/unix_socket_class_wrapp.git```
 make a directory /build
 go to directory: cd build
 call: 'cmake ..' to configure
