@@ -29,6 +29,10 @@ namespace ss
 
             void Listen(std::size_t backlog = 10);
 
+            void shutdown();
+
+            ~TcpSocket();
+
         private:
             SocketResource _socket;
 

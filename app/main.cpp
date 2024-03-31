@@ -1,51 +1,41 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <string>
 
 #include <tcpsocket.hpp>
+#include <tcpresolver.hpp>
+
 #include <netinet/in.h>
+#include <arpa/inet.h>
 
 int main(int argc, char **argv)
 {
-    std::thread new_thread([]{
-        ss::TcpSocket client_socket;
+    ss::TcpSocket socket;
 
-        sockaddr_in ss;
+    auto result = ss::TcpResolver::resolve("localhost", "5555");
 
-        ss.sin_family = AF_INET;
-        ss.sin_port = htons(3333);
-        ss.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+    std::cout << "testing new endpoint str addr class " << result.endpoint().toString() << std::endl;
+    std::cout << "testing new endpoint port class " << result.endpoint().port() << std::endl;
 
-        client_socket.Connect(ss);
-        std::string buffer{"hola"};
+    socket.Bind(result.get_nativeSocketAddress());
 
-        std::this_thread::sleep_for(std::chrono::seconds(3));
+    socket.Listen();
 
-        client_socket.Send(buffer);
+    std::cout << "listen on port " << result.endpoint().port() << std::endl;
 
-    });
+    while (true)
+    {
+        auto connection = socket.Accept();
 
-    ss::TcpSocket s;
-    
-    sockaddr_in ss;
+        connection.Send("HTTP/1.1 200 Ok\r\n");
+        connection.Send("\r\n");
+        connection.Send("{'status': 200}");
 
-    ss.sin_family = AF_INET;
-    ss.sin_port = htons(3333);
-    ss.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+        auto recv_from_client = connection.Receive(1024);
 
-    s.Bind(ss);
-    s.Listen();
+        std::cout << recv_from_client << std::endl;
+    }
 
-    std::cout << "listening on port " << ss.sin_port << std::endl;
-
-    ss::TcpSocket connection = s.Accept();
-    std::string buffer = connection.Receive(5);
-
-    std::cout << buffer << std::endl;
-
-    new_thread.join();
-
-    // std::cout << std::boolalpha;
-    // std::cout << v << std::endl;
     return 0;
 }

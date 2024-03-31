@@ -87,6 +87,16 @@ namespace ss
             throw std::system_error(_socket.get_socket().get_resource(), std::system_category());
     }
 
+    void TcpSocket::shutdown()
+    {
+        std::ignore = ::shutdown(_socket.get_socket().get_resource(), SHUT_RDWR);
+    }
+
+    TcpSocket::~TcpSocket()
+    {
+        this->shutdown();
+    }
+
     //private constructor to help, Accept method, to create a new comming socket
     TcpSocket::TcpSocket(int accept_socket) noexcept
     {
